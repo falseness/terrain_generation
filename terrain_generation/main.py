@@ -1,7 +1,10 @@
 import pygame
 import sys
 from time import time
-from perlin_noise import PerlinNoise
+from perlin_numpy import (
+    generate_fractal_noise_2d, generate_fractal_noise_3d,
+    generate_perlin_noise_2d, generate_perlin_noise_3d
+)
 
 
 size = [200, 200]
@@ -9,9 +12,11 @@ black = [0, 0, 0]
 green = [0, 255, 0]
 
 class GameOptions:
-    WIDTH = 400
-    HEIGHT = 400
-    SIZE = [WIDTH, HEIGHT]
+    PERIOD_OF_NOISE = (3, 3)
+    SIZE = (600, 600)
+    OCTAVES = 2
+    WIDTH = SIZE[0]
+    HEIGHT = SIZE[1]
 
 class MapData:
     def __init__(self, height: int, width: int):
@@ -24,11 +29,11 @@ class Generator:
 
 
 def main():
-    tmp = round(time() * 1000)
-    print(tmp)
-    noise = PerlinNoise(octaves=3, seed=tmp)
+
     xpix, ypix = GameOptions.HEIGHT, GameOptions.WIDTH
-    pic = [[noise([i / xpix, j / ypix]) for j in range(xpix)] for i in range(ypix)]
+    pp = 8
+    deg = 3
+    pic = generate_fractal_noise_2d(GameOptions.SIZE, GameOptions.PERIOD_OF_NOISE, GameOptions.OCTAVES)
     '''for q in range(4):
         noise2 = PerlinNoise(octaves=4, seed=(q + 2)*tmp)
         pic2 = [[noise2([i / xpix, j / ypix]) for j in range(xpix)] for i in range(ypix)]
@@ -45,10 +50,6 @@ def main():
     for i in range(len(pic)):
         for j in range(len(pic[i])):
             pic[i][j] = (pic[i][j] - minimum_value) / (maximum_value - minimum_value)
-    pygame.init()
-    pygame.font.init()
-
-    screen = pygame.display.set_mode(GameOptions.SIZE)
     game_over = False
 
     sur = pygame.Surface(GameOptions.SIZE)
@@ -59,12 +60,23 @@ def main():
                 color = [0, 0, 100]
             elif color_value < 140:
                 color = [0, 0, 200]
-            elif color_value < 180:
-                color = [150, 150, 0]
-            else:
+            elif color_value < 160:
+                color = [175, 175, 0]
+            elif color_value < 200:
                 color = [0, 200, 0]
+            elif color_value < 230:
+                color = [0, 100, 0]
+            elif color_value < 243:
+                color = [77, 77, 77]
+            else:
+                color = [153, 153, 153]
             sur.set_at((i, j), color)
 
+    pygame.init()
+    pygame.font.init()
+
+    screen = pygame.display.set_mode(GameOptions.SIZE)
+    pygame.display.flip()
     while not game_over:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

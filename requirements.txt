@@ -1,2 +1,2 @@
 pygame
-perlin_noise
+perlin_numpy
