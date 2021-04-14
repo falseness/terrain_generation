@@ -11,10 +11,10 @@ size = [200, 200]
 black = [0, 0, 0]
 green = [0, 255, 0]
 
-class GameOptions:
+class NoiseSettings:
     PERIOD_OF_NOISE = (3, 3)
     SIZE = (600, 600)
-    OCTAVES = 2
+    OCTAVES = 3
     WIDTH = SIZE[0]
     HEIGHT = SIZE[1]
 
@@ -30,10 +30,10 @@ class Generator:
 
 def main():
 
-    xpix, ypix = GameOptions.HEIGHT, GameOptions.WIDTH
+    xpix, ypix = NoiseSettings.HEIGHT, NoiseSettings.WIDTH
     pp = 8
     deg = 3
-    pic = generate_fractal_noise_2d(GameOptions.SIZE, GameOptions.PERIOD_OF_NOISE, GameOptions.OCTAVES)
+    pic = generate_fractal_noise_2d(NoiseSettings.SIZE, NoiseSettings.PERIOD_OF_NOISE, NoiseSettings.OCTAVES)
     '''for q in range(4):
         noise2 = PerlinNoise(octaves=4, seed=(q + 2)*tmp)
         pic2 = [[noise2([i / xpix, j / ypix]) for j in range(xpix)] for i in range(ypix)]
@@ -52,7 +52,7 @@ def main():
             pic[i][j] = (pic[i][j] - minimum_value) / (maximum_value - minimum_value)
     game_over = False
 
-    sur = pygame.Surface(GameOptions.SIZE)
+    sur = pygame.Surface(NoiseSettings.SIZE)
     for i in range(len(pic)):
         for j in range(len(pic[i])):
             color_value = 255 * pic[i][j]
@@ -75,7 +75,7 @@ def main():
     pygame.init()
     pygame.font.init()
 
-    screen = pygame.display.set_mode(GameOptions.SIZE)
+    screen = pygame.display.set_mode(NoiseSettings.SIZE)
     pygame.display.flip()
     while not game_over:
         for event in pygame.event.get():
