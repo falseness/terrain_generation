@@ -16,23 +16,15 @@ class Generator:
 
     def generate(self):
         noise = self.__get_noise()
-        min_value, max_value = self.__get_min_and_max(noise)
-        self.__normalize_noise(noise, min_value, max_value)
+        self.__normalize_noise(noise)
         return noise
 
     def __get_noise(self):
         return generate_fractal_noise_2d(NoiseSettings.SIZE, NoiseSettings.PERIOD_OF_NOISE, NoiseSettings.OCTAVES)
 
-    def __get_min_and_max(self, noise) -> Tuple[float, float]:
-        max_value = min_value = noise[0][0]
-        for i in range(len(noise)):
-            for j in range(len(noise[i])):
-                value = noise[i][j]
-                max_value = max(max_value, value)
-                min_value = min(min_value, value)
-        return min_value, max_value
-
-    def __normalize_noise(self, noise, min_value: float, max_value: float) -> None:
+    def __normalize_noise(self, noise) -> None:
+        min_value = noise.min()
+        max_value = noise.max()
         for i in range(len(noise)):
             for j in range(len(noise)):
                 noise[i][j] = (noise[i][j] - min_value) / (max_value - min_value)
