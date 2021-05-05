@@ -5,11 +5,14 @@ from typing import Tuple
 class MapDrawer:
     def __init__(self, noise_array, screen_size: Tuple[int, int], colors_and_intervals):
         self.__surface = pygame.Surface(screen_size)
-        get_color = self.__init_color_array(colors_and_intervals)
+        self.__get_color = self.__init_color_array(colors_and_intervals)
         for i in range(len(noise_array)):
             for j in range(len(noise_array[i])):
-                get_color_value = round(255 * noise_array[i][j])
-                self.__surface.set_at((i, j), get_color[get_color_value])
+                self.__surface.set_at((i, j), self.get_color(noise_array[i][j]))
+
+    def get_color(self, height: float):
+        MAXIMUM_VALUE = 255
+        return self.__get_color[round(MAXIMUM_VALUE * height)]
 
     def __init_color_array(self, colors_and_intervals):
         previous_interval_end = 0

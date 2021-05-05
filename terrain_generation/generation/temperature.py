@@ -1,29 +1,25 @@
 from typing import Tuple
 import numpy as np
-from perlin_numpy import generate_fractal_noise_2d
-from terrain_generation.generation.constants import NoiseSettings
-from terrain_generation.generation.utility import normalize_noise
+from terrain_generation.generation.utility import normalize_value, generate_common_noise
 from terrain_generation.draw.map import MapDrawer
 from terrain_generation.draw.constants import ColorsAndIntervals
 
 
 class TemperatureGenerator:
-    def generate(self, map_noise):
+    def generate(self, relief_noise):
         arr = self.__generate_main_temperature_distribution()
         for i in range(len(arr)):
             for j in range(len(arr[i])):
                 HIGH_RELIEF_HEIGHT = 0.9
                 CHANGE_TEMPERATURE = 0.2
-                if map_noise[i][j] > HIGH_RELIEF_HEIGHT:
+                if relief_noise[i][j] > HIGH_RELIEF_HEIGHT:
                     arr[i][j] += CHANGE_TEMPERATURE
-                MAXIMUM_TEMPERATURE = 1.0
-                arr[i][j] = min(arr[i][j], MAXIMUM_TEMPERATURE)
+                arr[i][j] = normalize_value(arr[i][j])
         return arr
 
     def __generate_main_temperature_distribution(self):
-        arr = self.__get_heat_belt_arr(NoiseSettings.SIZE)
-        noise = generate_fractal_noise_2d(NoiseSettings.SIZE, NoiseSettings.PERIOD_OF_NOISE, NoiseSettings.OCTAVES)
-        normalize_noise(noise)
+        noise = generate_common_noise()
+        arr = self.__get_heat_belt_arr((len(noise), len(noise[0])))
         return np.multiply(arr, noise)
 
     def __get_heat_belt_arr(self, size):
