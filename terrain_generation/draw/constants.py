@@ -17,11 +17,11 @@ class Color:
 
 
 class Biomes:
-    DESERT = (233, 217, 141)
-    GRASSLAND = (165, 224, 71)
+    DESERT = (255, 223, 97)
+    GRASSLAND = (109, 154, 51)
     TUNDRA = (101, 126, 111)
     ICE = (255, 255, 255)
-    SAVANNA = (181, 206, 97)
+    SAVANNA = (158, 197, 64)
     WOODLAND = (140, 175, 74)
     BOREAL_FOREST = (94, 115, 53)
     TROPICAL_RAINFOREST = (68, 124, 21)
@@ -32,12 +32,11 @@ class Biomes:
         self.BIOMES = {}
         biomes_table = [
             [self.DESERT, self.DESERT, self.DESERT, self.GRASSLAND, self.TUNDRA, self.ICE],
+            [self.DESERT, self.DESERT, self.DESERT, self.GRASSLAND, self.TUNDRA, self.ICE],
             [self.SAVANNA, self.SAVANNA, self.WOODLAND, self.WOODLAND, self.TUNDRA, self.ICE],
             [self.SAVANNA, self.SAVANNA, self.WOODLAND, self.BOREAL_FOREST, self.TUNDRA, self.ICE],
             [self.TROPICAL_RAINFOREST, self.TROPICAL_RAINFOREST, self.SEASONAL_FOREST, self.BOREAL_FOREST, self.TUNDRA,
              self.ICE],
-            [self.TROPICAL_RAINFOREST, self.TROPICAL_RAINFOREST, self.TEMPERATURE_RAINFOREST, self.BOREAL_FOREST,
-             self.TUNDRA, self.ICE]
         ]
         for i in range(len(Color.MOISTURE)):
             biomes_dict = {}
@@ -55,8 +54,8 @@ class ColorsAndIntervals:
 
     @staticmethod
     def get_temperature():
-        result = [(Color.HEAT_BELTS[0], 15), (Color.HEAT_BELTS[1], 30), (Color.HEAT_BELTS[2], 50),
-                  (Color.HEAT_BELTS[3], 90), (Color.HEAT_BELTS[4], 160), (Color.HEAT_BELTS[5], 256)]
+        result = [(Color.HEAT_BELTS[0], 15), (Color.HEAT_BELTS[1], 35), (Color.HEAT_BELTS[2], 55),
+                  (Color.HEAT_BELTS[3], 95), (Color.HEAT_BELTS[4], 140), (Color.HEAT_BELTS[5], 256)]
         return result
 
     @staticmethod

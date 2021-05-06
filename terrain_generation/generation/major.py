@@ -9,7 +9,7 @@ class MajorGenerator:
     def generate(self):
         relief, relief_drawer = self.__generate_and_save(ReliefGenerator, ColorsAndIntervals.get_relief(), 'relief')
         temperature, temperature_drawer = self.__generate_and_save(TemperatureGenerator,
-                                                        ColorsAndIntervals.get_temperature(), 'temperature', relief)
+                                        ColorsAndIntervals.get_temperature(), 'temperature', relief, relief_drawer)
         moisture, moisture_drawer = self.__generate_and_save(MoistureGenerator, ColorsAndIntervals.get_moisture(),
                                                              'moisture', relief, relief_drawer)
         return self.__get_biomes_map(relief, relief_drawer, temperature, temperature_drawer, moisture, moisture_drawer)

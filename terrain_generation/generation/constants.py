@@ -1,4 +1,4 @@
 class NoiseSettings:
-    PERIOD_OF_NOISE = (8, 5)
+    PERIOD_OF_NOISE = (8, 6)
     SIZE = (1024, 720)
-    OCTAVES = 4
+    OCTAVES = 3
