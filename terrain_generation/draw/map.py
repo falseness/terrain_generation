@@ -1,13 +1,23 @@
 import pygame
 from typing import Tuple
+import os
 
 
 class SimpleDrawer:
+    IMAGES_PATH = 'images/'
     def save_image(self, filename: str) -> None:
-        pygame.image.save(self._surface, 'images/' + filename + '.png')
+        self.__create_dir()
+        pygame.image.save(self._surface, self.IMAGES_PATH + filename + '.png')
 
     def draw(self, screen: pygame.display, position: Tuple[int, int]):
         screen.blit(self._surface, position)
+
+    def __create_dir(self):
+        try:
+            os.mkdir(self.IMAGES_PATH)
+        except OSError:
+            pass
+
 
 
 class MapDrawer(SimpleDrawer):
