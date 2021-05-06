@@ -17,16 +17,16 @@ class Color:
 
 
 class Biomes:
-    DESERT = (255, 223, 97)
-    GRASSLAND = (109, 154, 51)
+    DESERT = (236, 219, 116)
+    GRASSLAND = (164, 225, 70)
     TUNDRA = (101, 126, 111)
     ICE = (255, 255, 255)
-    SAVANNA = (158, 197, 64)
+    SAVANNA = (176, 208, 89)
     WOODLAND = (140, 175, 74)
     BOREAL_FOREST = (94, 115, 53)
     TROPICAL_RAINFOREST = (68, 124, 21)
     SEASONAL_FOREST = (76, 99, 24)
-    TEMPERATURE_RAINFOREST = (31, 73, 37)
+    TEMPERATURE_RAINFOREST = (30, 74, 34)
 
     def __init__(self):
         self.BIOMES = {}
@@ -60,5 +60,5 @@ class ColorsAndIntervals:
 
     @staticmethod
     def get_moisture():
-        return [(Color.MOISTURE[0], 50), (Color.MOISTURE[1], 110), (Color.MOISTURE[2], 140), (Color.MOISTURE[3], 190),
+        return [(Color.MOISTURE[0], 60), (Color.MOISTURE[1], 80), (Color.MOISTURE[2], 120), (Color.MOISTURE[3], 160),
                 (Color.MOISTURE[4], 256)]

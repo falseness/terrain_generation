@@ -1,15 +1,19 @@
 import pygame
 from terrain_generation.draw.constants import Color
-from terrain_generation.draw.map import SimpleDrawer
-from typing import Tuple
+from terrain_generation.generation.major import MajorGenerator
+from terrain_generation.draw.map import ImageDrawer
 
 
 class MainLoop:
-    def __init__(self, map_drawer: SimpleDrawer, screen_size: Tuple[int, int]):
-        self.__map_drawer = map_drawer
+    def __init__(self):
+        generated_map = MajorGenerator().generate()
+        drawer = ImageDrawer(generated_map)
+        drawer.save_image('terrain')
+
+        self.__map_drawer = drawer
 
         pygame.init()
-        self.__screen = pygame.display.set_mode(screen_size)
+        self.__screen = pygame.display.set_mode((len(generated_map), len(generated_map[0])))
         pygame.display.flip()
 
     def iterate(self):
