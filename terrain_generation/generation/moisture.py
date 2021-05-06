@@ -8,7 +8,6 @@ from terrain_generation.generation.constants import NoiseSettings
 class MoistureGenerator:
     def generate(self, relief_noise, relief_drawer: MapDrawer):
         arr = generate_common_noise()
-        MapDrawer(arr, NoiseSettings.SIZE, ColorsAndIntervals.get_moisture()).save_image('moisture_tmp')
         for i in range(len(arr)):
             for j in range(len(arr[i])):
                 color = relief_drawer.get_color(relief_noise[i][j])
@@ -22,5 +21,5 @@ class MoistureGenerator:
         if color == Color.OCEAN:
             return 1
         if color == Color.SAND:
-            return 0.3
+            return 0.1
         return 0.0

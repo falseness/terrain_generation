@@ -1,8 +1,6 @@
 from typing import Tuple
 import numpy as np
 from terrain_generation.generation.utility import normalize_value, generate_common_noise
-from terrain_generation.draw.map import MapDrawer
-from terrain_generation.draw.constants import ColorsAndIntervals
 
 
 class TemperatureGenerator:

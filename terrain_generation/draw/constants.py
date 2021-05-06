@@ -2,18 +2,49 @@ from typing import List
 
 
 class Color:
-    BLACK = [0, 0, 0]
-    DEEP_OCEAN = [0, 0, 100]
-    OCEAN = [0, 0, 200]
-    SAND = [175, 175, 0]
-    GRASS = [0, 200, 0]
-    DARK_GRASS = [0, 100, 0]
-    MOUNTAIN = [77, 77, 77]
-    MOUNTAIN_PEAK = [153, 153, 153]
+    BLACK = (0, 0, 0)
+    DEEP_OCEAN = (0, 0, 100)
+    OCEAN = (0, 0, 200)
+    SAND = (175, 175, 0)
+    GRASS = (0, 200, 0)
+    DARK_GRASS = (0, 100, 0)
+    MOUNTAIN = (77, 77, 77)
+    MOUNTAIN_PEAK = (153, 153, 153)
 
-    HEAT_BELTS = [[242, 68, 35], [244, 99, 38], [252, 240, 98], [108, 232, 135], [169, 250, 251], [93, 248, 253]]
+    HEAT_BELTS = [(242, 68, 35), (244, 99, 38), (252, 240, 98), (108, 232, 135), (169, 250, 251), (93, 248, 253)]
 
-    MOISTURE = [[247, 140, 44], [243, 238, 59], [115, 232, 49], [93, 248, 253], [45, 104, 250]]
+    MOISTURE = [(247, 140, 44), (243, 238, 59), (115, 232, 49), (93, 248, 253), (45, 104, 250)]
+
+
+class Biomes:
+    DESERT = (233, 217, 141)
+    GRASSLAND = (165, 224, 71)
+    TUNDRA = (101, 126, 111)
+    ICE = (255, 255, 255)
+    SAVANNA = (181, 206, 97)
+    WOODLAND = (140, 175, 74)
+    BOREAL_FOREST = (94, 115, 53)
+    TROPICAL_RAINFOREST = (68, 124, 21)
+    SEASONAL_FOREST = (76, 99, 24)
+    TEMPERATURE_RAINFOREST = (31, 73, 37)
+
+    def __init__(self):
+        self.BIOMES = {}
+        biomes_table = [
+            [self.DESERT, self.DESERT, self.DESERT, self.GRASSLAND, self.TUNDRA, self.ICE],
+            [self.SAVANNA, self.SAVANNA, self.WOODLAND, self.WOODLAND, self.TUNDRA, self.ICE],
+            [self.SAVANNA, self.SAVANNA, self.WOODLAND, self.BOREAL_FOREST, self.TUNDRA, self.ICE],
+            [self.TROPICAL_RAINFOREST, self.TROPICAL_RAINFOREST, self.SEASONAL_FOREST, self.BOREAL_FOREST, self.TUNDRA,
+             self.ICE],
+            [self.TROPICAL_RAINFOREST, self.TROPICAL_RAINFOREST, self.TEMPERATURE_RAINFOREST, self.BOREAL_FOREST,
+             self.TUNDRA, self.ICE]
+        ]
+        for i in range(len(Color.MOISTURE)):
+            biomes_dict = {}
+            for j in range(len(Color.HEAT_BELTS)):
+                biomes_dict[Color.HEAT_BELTS[j]] = biomes_table[i][j]
+            self.BIOMES[Color.MOISTURE[i]] = biomes_dict
+
 
 
 class ColorsAndIntervals:

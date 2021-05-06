@@ -1,11 +1,11 @@
 import pygame
 from terrain_generation.draw.constants import Color
-from terrain_generation.draw.map import MapDrawer
+from terrain_generation.draw.map import SimpleDrawer
 from typing import Tuple
 
 
 class MainLoop:
-    def __init__(self, map_drawer: MapDrawer, screen_size: Tuple[int, int]):
+    def __init__(self, map_drawer: SimpleDrawer, screen_size: Tuple[int, int]):
         self.__map_drawer = map_drawer
 
         pygame.init()
